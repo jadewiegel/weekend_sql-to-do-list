@@ -40,17 +40,17 @@ function getTasks(){
 function appendToDom(array){
     $('#toDoList').empty();
     for (let i=0; i<array.length; i++){
-    // console.log('in appendToDom,', array[i].id);
-    $('#toDoList').append(`
+        // console.log('in appendToDom,', array[i].id);
+        $('#toDoList').append(`
         <div>
-            <li>
-            <h3>${array[i].tasks} -- ${array[i].status} 
-            <button data-id="${array[i].id}" class="task_complete">Completed</button> 
-            <button data-id="${array[i].id}" class="delete">Delete</button
-            </h3>
-            </li>
+        <li>
+        <h3>${array[i].tasks} -- ${array[i].status} 
+        <button data-id="${array[i].id}" class="task_complete">Completed</button> 
+        <button data-id="${array[i].id}" class="delete">Delete</button
+        </h3>
+        </li>
         </div>
-    `)
+        `)
     }
     $('.task_complete').on('click', turnGreen);
 };

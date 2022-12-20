@@ -11,7 +11,7 @@ let tasksArray = [];
 //need routerGET
 tasksRouter.get('/', (req, res) => {
     console.log('request for /tasks was made');
-    let queryText = 'SELECT * from "tasks";';
+    let queryText = 'SELECT * from "tasks" ORDER BY id asc;';
     pool.query(queryText) //doing the query
     .then((result) => { 
         console.log('results from DB', result);
