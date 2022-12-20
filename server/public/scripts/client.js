@@ -42,9 +42,22 @@ function appendToDom(array){
     for (let i=0; i<array.length; i++){
     // console.log('in appendToDom,', array[i].id);
     $('#toDoList').append(`
-        <li><h3>${array[i].tasks} -- ${array[i].status} <button data-id="${array[i].id}" class="task_complete">Completed</button> <button data-id="${array[i].id}" class="delete">Delete</button</h3></li>
+        <div>
+            <li>
+            <h3>${array[i].tasks} -- ${array[i].status} 
+            <button data-id="${array[i].id}" class="task_complete">Completed</button> 
+            <button data-id="${array[i].id}" class="delete">Delete</button
+            </h3>
+            </li>
+        </div>
     `)
     }
+    $('.task_complete').on('click', turnGreen);
+};
+
+function turnGreen(){
+    console.log('inside turnGreen')
+    $(this).parent().css("background-color", "green");
 };
 
 function deleteTask(){

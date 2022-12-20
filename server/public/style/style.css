@@ -1,0 +1,14 @@
+body {
+    background-color: aqua;
+}
+
+p {
+    text-align: center;
+    font-size:2cm;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+}
+
+div {
+    color:coral;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
