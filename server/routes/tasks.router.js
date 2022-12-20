@@ -11,7 +11,16 @@ let tasksArray = [];
 //need routerGET
 tasksRouter.get('/', (req, res) => {
     console.log('request for /tasks was made');
-    res.send(tasksArray);
+    let queryText = 'SELECT * from "tasks";';
+    pool.query(queryText) //doing the query
+    .then((result) => { 
+        console.log('results from DB', result);
+        res.send(result.rows); //.rows makes result easier to read. 
+    })
+    .catch((error) => {
+        console.log('error making a query', error);
+        res.sendStatus(500);
+    });
 });
 
 //need routerPOST
@@ -43,7 +52,20 @@ tasksRouter.post('/', (req, res) => {
 //need routerPUT
 
 //need routerDELETE
-
+tasksRouter.delete('/:id', (req, res) => {
+    // let id = req.params.id;
+    console.log(`this is in the delete request id; ${req.params.id}`);
+    const queryText = `DELETE FROM "tasks" WHERE "id" = ${req.params.id};`;
+    pool.query(queryText)
+    .then((result) => {
+        console.log(result)
+        res.sendStatus(204);
+    })
+    .catch((error) => {
+        console.log('error making query', error);
+        res.sendStatus(500);
+    });
+});
 
 
 module.exports = tasksRouter;
