@@ -6,6 +6,7 @@ function onReady(){
     console.log('jq loaded');
     $('#toDoBtn').on('click', saveTaskList);
     $('#toDoList').on('click', '.delete', deleteTask);
+    $('#toDoList').on('click', '.task_complete', taskCompleted)
 };
 
 
@@ -38,11 +39,10 @@ function getTasks(){
 
 function appendToDom(array){
     $('#toDoList').empty();
-    
     for (let i=0; i<array.length; i++){
     // console.log('in appendToDom,', array[i].id);
     $('#toDoList').append(`
-        <li><h3>${array[i].tasks} -- ${array[i].status} <button data-id="${array[i].id}">Completed</button> <button data-id="${array[i].id}" class="delete">Delete</button</h3></li>
+        <li><h3>${array[i].tasks} -- ${array[i].status} <button data-id="${array[i].id}" class="task_complete">Completed</button> <button data-id="${array[i].id}" class="delete">Delete</button</h3></li>
     `)
     }
 };
@@ -60,3 +60,17 @@ function deleteTask(){
         console.log('error with deleting, ', error);
     })
 };
+
+function taskCompleted(){
+    const id = $(this).data('id');
+    console.log('inside taskCompleted, ', id);
+    $.ajax({
+        type: 'PUT',
+        url: `/tasks/status/${id}`,
+        data: {completed: 'Not Completed'},
+    }).then(function(){
+        getTasks();
+    }).catch(function(error){
+        console.log('error with putting', error);
+    })
+}
