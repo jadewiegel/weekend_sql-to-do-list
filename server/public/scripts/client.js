@@ -41,23 +41,30 @@ function appendToDom(array){
     $('#toDoList').empty();
     for (let i=0; i<array.length; i++){
         // console.log('in appendToDom,', array[i].id);
-        $('#toDoList').append(`
-        <div>
-        <li>
-        <h3>${array[i].tasks} -- ${array[i].status} 
-        <button data-id="${array[i].id}" class="task_complete">Completed</button> 
-        <button data-id="${array[i].id}" class="delete">Delete</button
-        </h3>
-        </li>
-        </div>
-        `)
-    }
-    $('.task_complete').on('click', turnGreen);
-};
+        if (array[i].status == 'Completed'){
+            $('#toDoList').append(`
+            <div class="green">
+            <li>
+            <h3 id="taskLine">${array[i].tasks} -- ${array[i].status} 
 
-function turnGreen(){
-    console.log('inside turnGreen')
-    $(this).parent().css("background-color", "green");
+            <button data-id="${array[i].id}" class="delete">Delete</button
+            </h3>
+            </li>
+            </div>
+        `)
+        } else
+            $('#toDoList').append(`
+            <div>
+            <li>
+            <h3 id="taskLine">${array[i].tasks} -- ${array[i].status} 
+            <button data-id="${array[i].id}" class="task_complete">Completed</button> 
+            <button data-id="${array[i].id}" class="delete">Delete</button
+            </h3>
+            </li>
+            </div>
+            `)
+        
+    }
 };
 
 function deleteTask(){
